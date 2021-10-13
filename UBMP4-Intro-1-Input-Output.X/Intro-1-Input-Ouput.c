@@ -31,21 +31,31 @@ int main(void)
     // Code in this while loop runs repeatedly.
     while(1)
 	{
+        if(SW5 == 0)
+        {
+            BEEPER = 1;
+            __delay_us(3405++);
+            BEEPER = 0;
+            __delay_us(3405);
+            
+        }
+        if(SW4 == 0)
+        {
+            BEEPER = 1;
+            __delay_us(1702);
+            BEEPER = 0;
+            __delay_us(1702);
+            
+        }
         if(SW3 == 0)
         {
-            if(SW4 == 0)
-            {
-                LED4 = 1;
-            }
-            else
-            {
-                LED4 = 0;
-            }
+            BEEPER = 1;
+            __delay_us(2723);
+            BEEPER = 0;
+            __delay_us(2723);
+            
         }
-        else
-        {
-            LED4 = 0;
-        }
+        
         
         // Add code for your Program Analysis and Programming Activities here:
         
@@ -72,6 +82,7 @@ int main(void)
  * 3. What voltage do you expect the microcontroller to output to LED D3 when
  *    the statement LED3 = 0; runs? What voltage do you expect the output to be
  *    when the statement LED3 = 1; runs?
+ * 
  * When LED3 = 0, the voltage will be zero and the voltage was 1.8 when LED 3 =1.
  *    You can confirm the output voltage with a voltmeter if you have access
  *    to one. If you tried that, did the voltage match your prediction?
@@ -196,6 +207,8 @@ int main(void)
  *    before MPLAB-X produces an error message? (Hint: can you think of a fast
  *    and efficient way of guessing an unknown number?)
  * 
+ *      4205 ms
+ * 
  * 2. The '__delay_ms();' function only accepts integers as delay values. To
  *    make delays shorter than 1ms, specify a delay in microseconds using the
  *    '__delay_us();' function. You won't be able to see such short LED flashes
@@ -215,6 +228,9 @@ int main(void)
  *    Does the pitch of the tone increase or decrease if the delay value is
  *    made smaller?
  * 
+ *      if you make delay longer the pitch goes lower if delay is shorter
+ *      pitch becomes higher.
+ * 
  * 3. This code demonstrates a more compact way of toggling the beeper output
  *    using a logical NOT operator '!'. Replace the code above, with this code:
  
@@ -230,6 +246,9 @@ int main(void)
  *    be in after this code runs? While one advantage of this method is smaller
  *    code, can you think of one or more disadvantages based on its output when
  *    the button is released?
+ *      
+ *      Because the beeper is set to the opposite, there is a chance it will stay
+ *      on after the button will be released.
  * 
  * 4. Using modified versions of the original SW2 'if' structure, create a
  *    program that makes a unique LED flashing pattern for each pushbutton.
@@ -237,6 +256,10 @@ int main(void)
  *    Test each of your flashing patterns. Describe what happens when more than
  *    one button is held. Do all of the patterns try to flash the LEDs at the
  *    same time, or sequentially? Explain why this is.
+ * 
+ *      the lights cycle through each if statement because all of them are true
+ *      and it stars from the first button pressed and goes down and loops from 
+ *      the top again
  * 
  * 5. Create a program that makes a different tone for each pushbutton.
  * 
