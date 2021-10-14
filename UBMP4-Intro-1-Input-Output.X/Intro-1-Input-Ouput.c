@@ -27,34 +27,18 @@ int main(void)
     // Configure oscillator and I/O ports. These functions run once at start-up.
     OSC_config();               // Configure internal oscillator for 48 MHz
     UBMP4_config();             // Configure on-board UBMP4 I/O devices
-	
+	bool lightOn = false;
     // Code in this while loop runs repeatedly.
     while(1)
 	{
-        if(SW5 == 0)
-        {
-            BEEPER = 1;
-            __delay_us(3405++);
-            BEEPER = 0;
-            __delay_us(3405);
+        if (SW3 == 0 && SW4 == 1) {
+            LED4 = 1;
             
         }
-        if(SW4 == 0)
-        {
-            BEEPER = 1;
-            __delay_us(1702);
-            BEEPER = 0;
-            __delay_us(1702);
-            
+        if (SW4 == 0) {
+            LED4 = 0;
         }
-        if(SW3 == 0)
-        {
-            BEEPER = 1;
-            __delay_us(2723);
-            BEEPER = 0;
-            __delay_us(2723);
-            
-        }
+        
         
         
         // Add code for your Program Analysis and Programming Activities here:
@@ -66,7 +50,10 @@ int main(void)
         }
     }
 }
-
+/* 6. Use individual 'if' structures to simulate 'Start' and 'Stop' buttons for
+    * an industrial machine. LED D4 should turn on when SW3 is pressed, stay on
+        * even after SW3 is released, and turn off when SW4 is pressed. Test your
+        * program to make sure it works.*/
 /* Program Analysis
  * 
  * 1. How many times do the LEDs flash if SW2 is quickly pressed and released?
@@ -266,11 +253,44 @@ int main(void)
  *    Test each tone by pressing each button individually. Next, press two or
  *    more buttons at the same time. Describe what the tone waveform would look
  *    like when more than one button is held.
+ *      
+ *      if(SW5 == 0)
+        {
+            BEEPER = 1;
+            __delay_us(3405);
+            BEEPER = 0;
+            __delay_us(3405);
+            
+        }
+        if(SW4 == 0)
+        {
+            BEEPER = 1;
+            __delay_us(1702);
+            BEEPER = 0;
+            __delay_us(1702);
+            
+        }
+        if(SW3 == 0)
+        {
+            BEEPER = 1;
+            __delay_us(2723);
+            BEEPER = 0;
+            __delay_us(2723);
+            
+        }
  * 
  * 6. Use individual 'if' structures to simulate 'Start' and 'Stop' buttons for
  *    an industrial machine. LED D4 should turn on when SW3 is pressed, stay on
  *    even after SW3 is released, and turn off when SW4 is pressed. Test your
  *    program to make sure it works.
+ * 
+ *      if (SW3 == 0) {
+            LED4 = 1;
+            
+        }
+        if (SW4 == 0) {
+            LED4 = 0;
+        }
  * 
  * 7. Running your program from 6, above, describe what happens when both SW3
  *    and SW4 are pressed. Does LED D4 stay on? If so, how does the brightness
@@ -278,12 +298,14 @@ int main(void)
  *    to this new state when both SW3 and SW4 are bing held? Can you explain
  *    why it changes?
  * 
+ *      The LED stays on but the LED turns less bright because it is on half of 
+ *      the loop and off half of the loop
  * 8. As you can imagine, an industrial machine that is able to turn on even
  *    while its 'Stop' button is pressed represents a significant safety hazard.
  *    Using a logical conditional operator, modify the start-stop program from
  *    activity 5 to make it safer. SW3 should only turn on LED D4 if SW4 is
  *    released.
- * 
+ *      
  * 9. LED D1 is normally used to indicate that a program is running, but it can
  *    be controlled by your program as well. If you take a look at the UBMP4
  *    schematic, you will see that LED D1's cathode (or negative) pin is
